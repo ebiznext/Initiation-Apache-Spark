@@ -25,20 +25,3 @@ ElasticSearch expose une interfe d'entrée sortie permettant de récupérer les 
 ```Scala
     allData.filter(_.rating < 5).saveToEs("myindex/rating")
 ```
-
-## Cassandra - Connecteur
-Cassandra possède maintenant son connecteur spécifique et avec l'introduction des ```DataFrame``` et du calcul de plan d'exécution qui vient avec a été codifié le **predictive pushdown**. TODO
-
-
-```xml
-<dependency>
-    <groupId>com.datastax.spark</groupId>
-    <artifactId>spark-cassandra-connector_2.10</artifactId>
-    <version>1.2.0-rc2</version>
-</dependency>
-<dependency>
-    <groupId>com.datastax.spark</groupId>
-    <artifactId>spark-cassandra-connector-java_2.10</artifactId>
-    <version>1.2.0-rc2</version>
-</dependency>
-```
