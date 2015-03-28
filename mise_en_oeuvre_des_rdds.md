@@ -35,7 +35,6 @@ Une seule action peut être appliquée. Elle consiste à exécuter une opératio
 + ``reduce``qui renvoie un objet unique (Equivalent à  [Java reduce]() et [Scala reduce](http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.immutable.List))
 + ``take``qui renvoie les n premiers éléments d'un RDD (Equivalent à  [Java take]() et [Scala take](http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.immutable.List))
 
-
 ![](rd3.png)
 
 ## Création d'un RDD
