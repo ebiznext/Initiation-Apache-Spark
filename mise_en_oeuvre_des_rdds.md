@@ -12,7 +12,6 @@ Les opérations disponibles sur un RDD sont :
 
 ![](rdd2.png)
 
-
 Le RDD peut subir des transformations successives au travers de fonctions similaires à celles présentes dans les collections "classiques. on peut citer par exemple :
 
 + ``map``: renvoie un nouveau RDD avec application d'une fonction de transformation sur chacun des objets du RDD initial
