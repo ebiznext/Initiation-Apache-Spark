@@ -25,9 +25,14 @@ object Workshop9 {
 ```
 
 Pour tester le streaming, il nous faut un serveur de test. 
-Sur macos, il suffit de lancer ``ncat`` avec la commande ``nc``suivante :
+Sur macos, il suffit de lancer ``ncat`` avec la commande ``nc`` et taper des caractères en ligne de commande qui seront alors retransmis sur le port d'écoute ncat :
 ```sh
 $ nc -l localhost 7777
+Hello World ++
+Hello World ++
+Hello World ++
+Hello World ++
+^C
 ```
 
 Sur Windows, ``ncat`` peut être téléchargé sur [nmap.org](https://nmap.org/ncat/)
