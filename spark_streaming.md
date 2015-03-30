@@ -24,4 +24,8 @@ object Workshop9 {
 
 ```
 
-
+Pour tester le streaming, il nous faut un serveur de test. 
+Sur macos, il suffit de lancer ``ncat`` avec la commande ``nc``suivante :
+```sh
+$ nc -l localhost 7777
+```
