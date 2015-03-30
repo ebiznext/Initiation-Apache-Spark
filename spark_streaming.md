@@ -29,3 +29,5 @@ Sur macos, il suffit de lancer ``ncat`` avec la commande ``nc``suivante :
 ```sh
 $ nc -l localhost 7777
 ```
+
+Sur Windows, ``ncat`` peut être téléchrgé sur (nmap.org)[https://nmap.org/ncat/]
