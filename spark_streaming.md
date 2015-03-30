@@ -30,4 +30,4 @@ Sur macos, il suffit de lancer ``ncat`` avec la commande ``nc``suivante :
 $ nc -l localhost 7777
 ```
 
-Sur Windows, ``ncat`` peut être téléchrgé sur (nmap.org)[https://nmap.org/ncat/]
+Sur Windows, ``ncat`` peut être téléchrgé sur [nmap.org](https://nmap.org/ncat/)
