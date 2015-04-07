@@ -14,7 +14,7 @@ Considérons l'exemple ci-dessous :
 ```
 
 Dans l'exemple ci-dessus le fichier sera lu deux fois, une première fois à l'exécution de l'action ``count``et une seconde fois à l'action ``first``qui renvoie le premier élément du RDD (la ligne la plus longue).
-```scala
+```
 // On rajoute l'appel à persist qui indique à Spark que le RDD ne doit pas être ``déchargé`` suite à l'exécution de l'action qui va suivre.
 val lines = sc.textFile("...").persist(StorageLevel.MEMORY_AND_DISK)
 
