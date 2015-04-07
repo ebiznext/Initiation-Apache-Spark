@@ -104,9 +104,6 @@ Certaines actions peuvent ne rien renvoyer du tout, comme cela est le cas pour l
     val sc = new SparkContext(conf)
 
     // Charger le fichier de ratings dans un RDD
-    val baselines: RDD[Seq[String]] = sc.textFile(url).map(_.split('\t'))
-    val lines: RDD[Rating] = baselines.map(row => Rating(row(0).toLong, row(1).toLong, row(2).toInt, new Timestamp(row(3).toLong * 1000)))
-
     // calculer la moyenne, le min, le max et le nombre d'éléments pour l'utilisateur avec l'id 200
     // ...
 
@@ -133,8 +130,6 @@ https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.Pa
     val conf = new SparkConf().setAppName("Workshop").setMaster("local[*]")
     val url = Paths.get(getClass.getResource("/ratings.txt").toURI).toAbsolutePath.toString
     val sc = new SparkContext(conf)
-
-    val lines: RDD[Rating] = sc.textFile(url).map(_.split('\t')).map(row => Rating(row(0).toLong, row(1).toLong, row(2).toInt, new Timestamp(row(3).toLong * 1000)))
 
     val cachedRDD: RDD[(Long, Int)] = lines.map(rating => (rating.user, rating.rating)).persist()
     val count = cachedRDD.count()
