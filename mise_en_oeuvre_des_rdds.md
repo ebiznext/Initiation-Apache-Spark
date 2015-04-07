@@ -132,9 +132,13 @@ https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.Pa
     val sc = new SparkContext(conf)
 
     // Charger le fichier de ratings dans un RDD
+    // ...
     // Créer un RDD clef/valeur [userid, rating]
+    // ...
     // Mettre le RDD en cache
+    // ...
     // Calculer le nombre de paires
+    // ...
     println(s"Count=$count")
     // Calculer le nombre d'utilisateur distincts
     val userCount = cachedRDD.groupByKey().count()
