@@ -48,7 +48,7 @@ object Workshop2 {
     val sc = new SparkContext(conf)
 
     // Charger le fichier de ratings dans un RDD
-
+    // Cacher le RDD de l'utilisateur avec l'id 200
     val cachedRDD = lines.filter(_.user == 200).persist(StorageLevel.MEMORY_AND_DISK)
     val count = cachedRDD.count()
     val cachedRating = cachedRDD.map(_.rating).persist()
