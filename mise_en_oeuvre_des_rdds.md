@@ -138,6 +138,34 @@ lines.map(_.length).sortBy(x=> -x, ascending = false)
 lines.unpersist()
 
 ```
+
+###Exercice 2
+```scala
+object Workshop2 {
+
+  def main(args: Array[String]): Unit = {
+    val conf = new SparkConf().setAppName("Workshop").setMaster("local[*]")
+    val url = getClass.getResource("/ratings.txt").toString.replace("%20", " ")
+    val sc = new SparkContext(conf)
+
+    // Charger le fichier de ratings dans un RDD
+    // Cacher le RDD de l'utilisateur avec l'id 200
+    // calculer la moyenne, le min, le max et le nombre d'éléments pour l'utilisateur avec l'id 200
+    // Libérer du cache
+
+
+    println( s"""
+     count=$count
+     min=$min
+     mean=$mean
+     max=$max
+       """)
+
+  }
+}
+```
+
+
 ## Les Pairs RDD
 Spark offre des fonctionnalités spécifiques aux RDD clef-valeur - ``RDD[(K,V)]``. Il s'agit notamment des fonctions ``groupByKey, reduceByKey, mapValues, countByKey``, 
 https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.PairRDDFunctions
