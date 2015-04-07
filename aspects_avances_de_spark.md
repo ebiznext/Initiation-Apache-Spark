@@ -5,6 +5,27 @@ Tous les programmes Spark ne sont pas égaux. Spark offre plusieurs mécanismes 
 + Le broadcast
 + Le partitionnement
 
+## Le cache
+Considérons l'exemple ci-dessous :
+```scala
+1. val lines = sc.textFile("...")
+2. lines.count() // renvoie le nombre de lignes
+3. lines.map(_.length).sortBy(x=> -x, ascending = false).first()
+```
+
+Dans l'exemple ci-dessus le fichier sera lu deux fois, une première fois à l'exécution de l'action ``count``et une seconde fois à l'action ``first``qui renvoie le premier élément du RDD (la ligne la plus longue).
+```
+// On rajoute l'appel à persist qui indique à Spark que le RDD ne doit pas être ``déchargé`` suite à l'exécution de l'action qui va suivre.
+val lines = sc.textFile("...").persist(StorageLevel.MEMORY_AND_DISK)
+
+lines.count() // renvoie le nombre de lignes
+lines.map(_.length).sortBy(x=> -x, ascending = false)
+
+// Le RDD est supprimé du cache.
+lines.unpersist()
+
+```
+
 ## Les Pairs RDD
 Spark offre des fonctionnalités spécifiques aux RDD clef-valeur - ``RDD[(K,V)]``. Il s'agit notamment des fonctions ``groupByKey, reduceByKey, mapValues, countByKey``, 
 https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.PairRDDFunctions
@@ -74,26 +95,6 @@ https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.Pa
 ```
 
 
-## Le cache
-Considérons l'exemple ci-dessous :
-```scala
-1. val lines = sc.textFile("...")
-2. lines.count() // renvoie le nombre de lignes
-3. lines.map(_.length).sortBy(x=> -x, ascending = false).first()
-```
-
-Dans l'exemple ci-dessus le fichier sera lu deux fois, une première fois à l'exécution de l'action ``count``et une seconde fois à l'action ``first``qui renvoie le premier élément du RDD (la ligne la plus longue).
-```
-// On rajoute l'appel à persist qui indique à Spark que le RDD ne doit pas être ``déchargé`` suite à l'exécution de l'action qui va suivre.
-val lines = sc.textFile("...").persist(StorageLevel.MEMORY_AND_DISK)
-
-lines.count() // renvoie le nombre de lignes
-lines.map(_.length).sortBy(x=> -x, ascending = false)
-
-// Le RDD est supprimé du cache.
-lines.unpersist()
-
-```
 
 ### La sérialisation
 L'option ``MEMORY_AND_DISK`` indique que Spark peut persister les données sur le disque si la mémoire est insuffisante. D'autres options sont disponibles et permettent par exemple de réduire l'empreinte mémoire des objets (au détriment de la CPU toutefois).
