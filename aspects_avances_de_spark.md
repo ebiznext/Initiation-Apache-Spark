@@ -49,15 +49,7 @@ object Workshop2 {
 
     // Charger le fichier de ratings dans un RDD
     // Cacher le RDD de l'utilisateur avec l'id 200
-    // Compter le nombre de rating
-    val cachedRDD = lines.filter(_.user == 200).persist(StorageLevel.MEMORY_AND_DISK)
-    val count = cachedRDD.count()
-    val cachedRating = cachedRDD.map(_.rating).persist()
-    cachedRDD.unpersist(false)
-    val mean = cachedRating.mean()
-    val max = cachedRating.max()
-    val min = cachedRating.min()
-    cachedRating.unpersist(false)
+    // calculer la moyenne, le min, le max et le nombre d'éléments pour l'utilisateur avec l'id 200
 
 
     println( s"""
