@@ -38,7 +38,38 @@ conf.set("spark.serializer", ""org.apache.spark.serializer.KryoSerializer)
 conf.set("spark.kryo.registrationRequired", "true")
 conf.registerKryoClasses(Array(classOf[Class1], classOf[Class2], classOf[Class3]))
 ```
+###Exercice
+```scala
+object Workshop2 {
 
+  def main(args: Array[String]): Unit = {
+    val conf = new SparkConf().setAppName("Workshop").setMaster("local[*]")
+    val url = getClass.getResource("/ratings.txt").toString.replace("%20", " ")
+    val sc = new SparkContext(conf)
+
+
+    val lines: RDD[Rating] = sc.textFile(url).map(_.split('\t')).map(row => Rating(row(0).toLong, row(1).toLong, row(2).toInt, new Timestamp(row(3).toLong * 1000)))
+
+    val cachedRDD = lines.filter(_.user == 200).persist(StorageLevel.MEMORY_AND_DISK)
+    val count = cachedRDD.count()
+    val cachedRating = cachedRDD.map(_.rating).persist()
+    cachedRDD.unpersist(false)
+    val mean = cachedRating.mean()
+    val max = cachedRating.max()
+    val min = cachedRating.min()
+    cachedRating.unpersist(false)
+
+
+    println( s"""
+     count=$count
+     min=$min
+     mean=$mean
+     max=$max
+       """)
+
+  }
+}
+```
 
 ## Les accumulateurs
 Consiste à définir une variable qui sera mise à jour par l'ensemble des noeuds du cluster lors de l'exécution de l'action. Cette variable pourra ensuite être lue sur le driver.
