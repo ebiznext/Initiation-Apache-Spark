@@ -139,7 +139,7 @@ lines.unpersist()
 
 ```
 
-###Exercice 2 : Utilisation du Cache
+###Exercice 2 : Utilisation du cache
 ```scala
 object Workshop2 {
 
