@@ -140,8 +140,7 @@ object Workshop5 {
     val sc = new SparkContext(conf)
 
 
-    val lines: RDD[Rating] = sc.textFile(url).map(_.split('\t')).map(row => Rating(row(0).toLong, row(1).toLong, row(2).toInt, new Timestamp(row(3).toLong * 1000)))
-
+    val lines: RDD[Rating] = //...
     val cachedRDD: RDD[(Long, List[Int])] = lines.map(rating => (rating.user, List(rating.rating))).reduceByKey(_ ++ _) persist()
     val count = cachedRDD.count()
     println(s"usercount=$count")
