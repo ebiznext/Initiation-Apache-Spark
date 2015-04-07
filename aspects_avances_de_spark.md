@@ -185,9 +185,7 @@ object Workshop6 {
 
     val lines: RDD[Rating] = // ...
     // Imprimer le libellé des films qui ont un rating de 5
-    lines.filter(_.rating == 5).map(_.movie).distinct().sortBy(x => x).foreach { movieid =>
-      println(labels.value(movieid))
-    }
+    // ...
   }
 }
 ```
