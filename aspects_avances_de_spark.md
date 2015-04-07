@@ -147,7 +147,7 @@ object Workshop5 {
 
     val allRDDs: RDD[(Long, (Int, Int, Int, Int))] = ...
 
-    // compute the mean
+    // Calculer la moyenne globale
     val accumSum: Accumulator[Int] = sc.accumulator(0)
     val accumCount: Accumulator[Int] = sc.accumulator(0)
     cachedRDD.foreach { it =>
