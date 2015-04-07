@@ -97,6 +97,7 @@ Certaines actions peuvent ne rien renvoyer du tout, comme cela est le cas pour l
 
 #Exercices
 
-##Enoncé de l'exercice 1
+``Scala
 
+``
 
