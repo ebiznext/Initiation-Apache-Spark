@@ -180,7 +180,7 @@ object Workshop6 {
 
     // Récupérer la liste des produits sous forme de Map[idProduit:Long, Libelle:String]
     val products: Map[Long, String] = // ...
-    val labels: Broadcast[Map[Long, String]] = sc.broadcast(products)
+    val labels: Broadcast[Map[Long, String]] = // ...
 
 
     val lines: RDD[Rating] = sc.textFile(url).map(_.split('\t')).map(row => Rating(row(0).toLong, row(1).toLong, row(2).toInt, new Timestamp(row(3).toLong * 1000)))
