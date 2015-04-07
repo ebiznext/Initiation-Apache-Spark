@@ -174,9 +174,11 @@ object Workshop6 {
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Workshop").setMaster("local[*]")
     val url = Paths.get(getClass.getResource("/ratings.txt").toURI).toAbsolutePath.toString
+    // Fichier de produits au format id\tLibellé
     val urlProducts = Paths.get(getClass.getResource("/products.txt").toURI).toAbsolutePath.toString
     val sc = new SparkContext(conf)
 
+    // Récupérer la liste des produits sous forme de Map[idProduit:Long, Libelle:String]
     val products: Map[Long, String] = sc.textFile(urlProducts).map(_.split('\t')).map(row => (row(0).toLong, row(1))).collect().toMap
     val labels: Broadcast[Map[Long, String]] = sc.broadcast(products)
 
