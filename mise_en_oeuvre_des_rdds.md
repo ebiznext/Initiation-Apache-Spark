@@ -170,7 +170,7 @@ object Workshop2 {
 Spark offre des fonctionnalités spécifiques aux RDD clef-valeur - ``RDD[(K,V)]``. Il s'agit notamment des fonctions ``groupByKey, reduceByKey, mapValues, countByKey, cogroup``, 
 https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.PairRDDFunctions
 
-###Exercice 3
+###Exercice 3 : 
 ```
  // Combien de fois chaque utilisateur a voté
   def main(args: Array[String]): Unit = {
