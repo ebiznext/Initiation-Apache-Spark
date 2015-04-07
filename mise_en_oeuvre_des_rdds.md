@@ -142,7 +142,6 @@ https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.Pa
     println(s"Count=$count")
     // Calculer le nombre d'utilisateur distincts
     // ...
-    val userCount = cachedRDD.groupByKey().count()
     println(s"UserCount=$userCount")
 
     val sum: RDD[(Long, Int)] = cachedRDD.reduceByKey(_ + _)
