@@ -103,7 +103,7 @@ object Workshop4 {
 
     val lines: RDD[Rating] = ...
     
-    val cachedRDD: RDD[(Long, List[Int])] = lines.map(rating => (rating.user, List(rating.rating))).reduceByKey(_ ++ _) persist()
+    val cachedRDD: RDD[(Long, List[Int])] = ... // key = userid, value = list of rating values
     val count = cachedRDD.count()
     println(s"usercount=$count")
 
