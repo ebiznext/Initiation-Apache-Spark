@@ -124,9 +124,8 @@ Certaines actions peuvent ne rien renvoyer du tout, comme cela est le cas pour l
 
 ## Les Pairs RDD
 
-Spark offre des fonctionnalités spécifiques aux RDD clef-valeur (``RDD[(K,V)]``). Il s'agit notamment des fonctions groupByKey, reduceByKey, mapValues.
-
-groupByKey 
+Spark offre des fonctionnalités spécifiques aux RDD clef-valeur - ``RDD[(K,V)]``. Il s'agit notamment des fonctions groupByKey, reduceByKey, mapValues, countByKey, 
+(https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.PairRDDFunctions)[]
 
 
 
