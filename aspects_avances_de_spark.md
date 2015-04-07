@@ -1,6 +1,5 @@
 # Partie 3 : Aspects avancés de Spark
 Tous les programmes Spark ne sont pas égaux. Spark offre plusieurs mécanismes d'amélioration des performances dont :
-+ Le cache
 + Les accumulateurs
 + Le broadcast
 + Le partitionnement
