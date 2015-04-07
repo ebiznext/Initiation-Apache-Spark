@@ -47,8 +47,7 @@ object Workshop2 {
     val url = getClass.getResource("/ratings.txt").toString.replace("%20", " ")
     val sc = new SparkContext(conf)
 
-
-    val lines: RDD[Rating] = sc.textFile(url).map(_.split('\t')).map(row => Rating(row(0).toLong, row(1).toLong, row(2).toInt, new Timestamp(row(3).toLong * 1000)))
+    // Charger le fichier de ratings dans un RDD
 
     val cachedRDD = lines.filter(_.user == 200).persist(StorageLevel.MEMORY_AND_DISK)
     val count = cachedRDD.count()
