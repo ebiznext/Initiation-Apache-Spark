@@ -98,6 +98,35 @@ Certaines actions peuvent ne rien renvoyer du tout, comme cela est le cas pour l
 #Exercices
 
 ```scala
+  def main(args: Array[String]): Unit = {
+    val conf = new SparkConf().setAppName("Workshop").setMaster("local[*]")
+    val url = Paths.get(getClass.getResource("/ratings.txt").toURI).toAbsolutePath.toString
+    val sc = new SparkContext(conf)
+
+
+    val baselines: RDD[Seq[String]] = sc.textFile(url).map(_.split('\t'))
+    val lines: RDD[Rating] = baselines.map(row => Rating(row(0).toLong, row(1).toLong, row(2).toInt, new Timestamp(row(3).toLong * 1000)))
+
+    val mean = lines.filter(_.user == 200).map(_.rating).mean()
+    val max = lines.filter(_.user == 200).map(_.rating).max()
+    val min = lines.filter(_.user == 200).map(_.rating).min()
+    val count = lines.filter(_.user == 200).count()
+
+    val x = 1 until 1001
+    sc.parallelize(x)
+
+    println( s"""
+    count=$count
+    min=$min
+    mean=$mean
+    max=$max
+      """)
+
+
+    val l = List(1, 2, 3 4, 5, 6, 7)
+
+  }
+}
 
 ```
 
