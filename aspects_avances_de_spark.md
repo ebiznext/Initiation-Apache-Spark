@@ -91,7 +91,7 @@ Suite à des opérations de transformation réduisant de manière significative 
 lines.filter(x => x._2 < 3).coalesce(3)
 ```
 
-###Exercice 6
+###Exercice 4
 ```scala
 object Workshop4 {
 
