@@ -107,7 +107,8 @@ object Workshop4 {
     val count = cachedRDD.count()
     println(s"usercount=$count")
 
-    val allRDDs: RDD[(Long, (Int, Int, Int, Int))] = ... // Utiliser mapPartition pour calculer par utilisateur la moyenne, le min, le max et le nombre de ratings par utilisateur
+    val allRDDs: RDD[(Long, (Int, Int, Int, Int))] = ... 
+    // Utiliser mapPartition pour calculer par utilisateur la moyenne, le min, le max et le nombre de ratings par utilisateur
 
 
     allRDDs.filter(_._1 == 315).foreach { case (x, y) =>
