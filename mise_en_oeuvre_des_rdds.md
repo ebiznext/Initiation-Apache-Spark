@@ -95,7 +95,7 @@ Un opération sur un RDD est une action lorsqu'elle ne renvoie pas de RDD mais q
 Certaines actions peuvent ne rien renvoyer du tout, comme cela est le cas pour l'action ``foreach``.
 
 
-#Exercices
+#Exercice
 
 ```scala
   def main(args: Array[String]): Unit = {
