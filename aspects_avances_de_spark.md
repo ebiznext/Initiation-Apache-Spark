@@ -179,7 +179,7 @@ object Workshop6 {
     val sc = new SparkContext(conf)
 
     // Récupérer la liste des produits sous forme de Map[idProduit:Long, Libelle:String]
-    val products: Map[Long, String] = sc.textFile(urlProducts).map(_.split('\t')).map(row => (row(0).toLong, row(1))).collect().toMap
+    val products: Map[Long, String] = // ...
     val labels: Broadcast[Map[Long, String]] = sc.broadcast(products)
 
 
