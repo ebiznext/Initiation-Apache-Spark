@@ -138,4 +138,70 @@ lines.map(_.length).sortBy(x=> -x, ascending = false)
 lines.unpersist()
 
 ```
+## Les Pairs RDD
+Spark offre des fonctionnalités spécifiques aux RDD clef-valeur - ``RDD[(K,V)]``. Il s'agit notamment des fonctions ``groupByKey, reduceByKey, mapValues, countByKey``, 
+https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.PairRDDFunctions
 
+###Exercice 3
+```
+ // Combien de fois chaque utilisateur a voté
+  def main(args: Array[String]): Unit = {
+    val conf = new SparkConf().setAppName("Workshop").setMaster("local[*]")
+    val url = Paths.get(getClass.getResource("/ratings.txt").toURI).toAbsolutePath.toString
+    val sc = new SparkContext(conf)
+
+    // Charger le fichier de ratings dans un RDD
+    // ...
+    // Créer un RDD clef/valeur [userid, rating]
+    // ...
+    // Mettre le RDD en cache
+    // ...
+    // Calculer le nombre de paires
+    // ...
+    println(s"Count=$count")
+    // Calculer le nombre d'utilisateur distincts
+    // ...
+    println(s"UserCount=$userCount")
+
+    // Calculer la somme des ratings / utilisateur
+    // ...
+    // Calculer le nombre de ratings par utilisateur
+    // ...
+    // Calculer la plus faible note donnée par chaque utilisateur
+    // ...
+    // Calculer la plus forte note donnée par chaque utilisateur
+    // Mettre l'ensemble des RDDs dans un RDD unique (union) sans écraser les valeurs. (allRDDs)
+    // ...
+    // Indice : Modifier les transformations précédentes pour avoir un tuple avec une seule valeur significative
+    // ...
+    // Réaliser une variante en utilisant cogroup
+    // ...
+
+
+    // ----> Ne fonctionnera pas
+    //    cachedRDD.map { userRatings =>
+    //      val user = userRatings._1
+    //      val ratings = sc.makeRDD(userRatings._2)
+    //      ratings.map(_.rating).mean()
+    //    }
+
+    allRDDs.foreach { case (x, y) =>
+      println( s"""
+     user=$x
+     count=${y._4}
+     min=${y._1}
+     mean=${y._2}
+     max=${y._3}
+       """)
+    }
+    val sqlContext: SQLContext = new org.apache.spark.sql.SQLContext(sc)
+    import sqlContext.implicits._
+
+    lines.toDF().registerTempTable("ratings")
+    val maxRatings: DataFrame = sqlContext.sql("SELECT user, rating from ratings where rating = 5")
+    //maxRatings.map(row => row(0) + "=" + row(1)).collect().foreach(println)
+
+  }
+}
+
+```
