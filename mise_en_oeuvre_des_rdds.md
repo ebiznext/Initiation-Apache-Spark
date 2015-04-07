@@ -123,3 +123,6 @@ Certaines actions peuvent ne rien renvoyer du tout, comme cela est le cas pour l
 
 
 ## Les Pairs RDD
+
+
+
