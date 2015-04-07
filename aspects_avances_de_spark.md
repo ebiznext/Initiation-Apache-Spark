@@ -183,8 +183,7 @@ object Workshop6 {
     val labels: Broadcast[Map[Long, String]] = // ...
 
 
-    val lines: RDD[Rating] = sc.textFile(url).map(_.split('\t')).map(row => Rating(row(0).toLong, row(1).toLong, row(2).toInt, new Timestamp(row(3).toLong * 1000)))
-
+    val lines: RDD[Rating] = // ...
     println(lines.partitioner)
     lines.filter(_.rating == 5).map(_.movie).distinct().sortBy(x => x).foreach { movieid =>
       println(labels.value(movieid))
