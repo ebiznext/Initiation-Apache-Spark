@@ -100,10 +100,11 @@ Certaines actions peuvent ne rien renvoyer du tout, comme cela est le cas pour l
 ```scala
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Workshop").setMaster("local[*]")
+    // Fichier de rating au format userid\tmovie\trating\ttimestamp
     val url = Paths.get(getClass.getResource("/ratings.txt").toURI).toAbsolutePath.toString
     val sc = new SparkContext(conf)
 
-
+    // Charger le fichier de ratings 
     val baselines: RDD[Seq[String]] = sc.textFile(url).map(_.split('\t'))
     val lines: RDD[Rating] = baselines.map(row => Rating(row(0).toLong, row(1).toLong, row(2).toInt, new Timestamp(row(3).toLong * 1000)))
 
