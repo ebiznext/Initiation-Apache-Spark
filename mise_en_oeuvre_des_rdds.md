@@ -135,7 +135,6 @@ https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.Pa
     // Créer un RDD clef/valeur [userid, rating]
     // Mettre le RDD en cache
     // Calculer le nombre de paires
-    val count = cachedRDD.count()
     println(s"Count=$count")
     val userCount = cachedRDD.groupByKey().count()
     println(s"UserCount=$userCount")
