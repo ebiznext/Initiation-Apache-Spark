@@ -132,6 +132,7 @@ https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.Pa
     val sc = new SparkContext(conf)
 
     // Charger le fichier de ratings dans un RDD
+    // Créer un RDD clef/valeur [userid, rating]
     val cachedRDD: RDD[(Long, Int)] = lines.map(rating => (rating.user, rating.rating)).persist()
     val count = cachedRDD.count()
     println(s"Count=$count")
