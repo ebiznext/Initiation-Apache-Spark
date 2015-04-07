@@ -144,6 +144,11 @@ https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.Pa
     // ...
     println(s"UserCount=$userCount")
 
+    // Calculer la somme des ratings / utilisateur
+    // ...
+    // Calculer le nombre de ratings par utilisateur
+    // ...
+    /// Calculer le min rating par utilisateur
     val sum: RDD[(Long, Int)] = cachedRDD.reduceByKey(_ + _)
     val counts: RDD[(Long, (Int, Int, Int, Int))] = cachedRDD.map(row => (row._1, 1)).reduceByKey(_ + _).mapValues((0, 0, 0, _))
     val min: RDD[(Long, (Int, Int, Int, Int))] = cachedRDD.reduceByKey((x, y) => if (x <= y) x else y).mapValues((_, 0, 0, 0))
