@@ -150,15 +150,7 @@ object Workshop5 {
     // Calculer la moyenne globale
     val accumSum: Accumulator[Int] = sc.accumulator(0)
     val accumCount: Accumulator[Int] = sc.accumulator(0)
-    cachedRDD.foreach { it =>
-      accumSum += it._2.sum
-      accumCount += it._2.size
-    }
-
-    lines.map(_.movie).distinct().collect().foreach { movie =>
-      println(movie+"\tProduct "+movie)
-    }
-    val globalMean = accumSum.value / accumCount.value
+    //...
     println(s"global mean = ${globalMean}")
     allRDDs.filter(_._1 == 315).foreach { case (x, y) =>
       println( s"""
