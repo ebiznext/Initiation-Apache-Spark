@@ -152,6 +152,7 @@ https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.Pa
     // ...
     // Calculer la plus forte note donnée par chaque utilisateur
     // ...
+    
     val allRDDs: RDD[(Long, (Int, Int, Int, Int))] = sc.union(min, mean, max, counts).reduceByKey { (x, y) => (x._1 + y._1, x._2 + y._2, x._3 + y._3, x._4 + y._4) }
 
     val res: RDD[(Long, (Iterable[(Int, Int, Int, Int)], Iterable[(Int, Int, Int, Int)], Iterable[(Int, Int, Int, Int)], Iterable[(Int, Int, Int, Int)]))] = counts.cogroup(min, mean, max)
