@@ -164,3 +164,30 @@ object Workshop5 {
   }
 }
 ```
+
+
+###Exercice 6 : Le broadcast
+```scala
+object Workshop6 {
+
+  // Combien de fois chaque utilisateur a voté
+  def main(args: Array[String]): Unit = {
+    val conf = new SparkConf().setAppName("Workshop").setMaster("local[*]")
+    val url = Paths.get(getClass.getResource("/ratings.txt").toURI).toAbsolutePath.toString
+    val urlProducts = Paths.get(getClass.getResource("/products.txt").toURI).toAbsolutePath.toString
+    val sc = new SparkContext(conf)
+
+    val products: Map[Long, String] = sc.textFile(urlProducts).map(_.split('\t')).map(row => (row(0).toLong, row(1))).collect().toMap
+    val labels: Broadcast[Map[Long, String]] = sc.broadcast(products)
+
+
+    val lines: RDD[Rating] = sc.textFile(url).map(_.split('\t')).map(row => Rating(row(0).toLong, row(1).toLong, row(2).toInt, new Timestamp(row(3).toLong * 1000)))
+
+    println(lines.partitioner)
+    lines.filter(_.rating == 5).map(_.movie).distinct().sortBy(x => x).foreach { movieid =>
+      println(labels.value(movieid))
+    }
+  }
+}
+```
+
