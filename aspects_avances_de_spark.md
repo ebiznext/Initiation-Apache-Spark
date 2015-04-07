@@ -93,7 +93,7 @@ https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.Pa
 }
 
 ```
-### mapParitions
+### mapPartitions
 
 
 ### La sérialisation
