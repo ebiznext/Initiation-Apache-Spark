@@ -152,12 +152,6 @@ https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.Pa
     // ...
     // Calculer la plus forte note donnée par chaque utilisateur
     // ...
-    val sum: RDD[(Long, Int)] = cachedRDD.reduceByKey(_ + _)
-    val counts: RDD[(Long, (Int, Int, Int, Int))] = cachedRDD.map(row => (row._1, 1)).reduceByKey(_ + _).mapValues((0, 0, 0, _))
-    val min: RDD[(Long, (Int, Int, Int, Int))] = cachedRDD.reduceByKey((x, y) => if (x <= y) x else y).mapValues((_, 0, 0, 0))
-    val mean: RDD[(Long, (Int, Int, Int, Int))] = counts.join(sum).map { case (x, y) => (x, y._2 / y._1._4) }.mapValues((0, _, 0, 0))
-    val max: RDD[(Long, (Int, Int, Int, Int))] = cachedRDD.reduceByKey((x, y) => if (x >= y) x else y).mapValues((0, 0, _, 0))
-
     val allRDDs: RDD[(Long, (Int, Int, Int, Int))] = sc.union(min, mean, max, counts).reduceByKey { (x, y) => (x._1 + y._1, x._2 + y._2, x._3 + y._3, x._4 + y._4) }
 
     val res: RDD[(Long, (Iterable[(Int, Int, Int, Int)], Iterable[(Int, Int, Int, Int)], Iterable[(Int, Int, Int, Int)], Iterable[(Int, Int, Int, Int)]))] = counts.cogroup(min, mean, max)
