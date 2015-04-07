@@ -148,11 +148,12 @@ https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.Pa
     // ...
     // Calculer le nombre de ratings par utilisateur
     // ...
-    // Calculer la plus faioble note donnée par chaque utilisateur
+    // Calculer la plus faible note donnée par chaque utilisateur
     // ...
     // Calculer la plus forte note donnée par chaque utilisateur
     // ...
-    
+    // Mettre l'ensemble des RDDs dans un RDD unique (union) sans écraser les valeurs.
+    // Indice : Modifier les transformations précédentes pour avoir un tuple avec une seule valeur significative
     val allRDDs: RDD[(Long, (Int, Int, Int, Int))] = sc.union(min, mean, max, counts).reduceByKey { (x, y) => (x._1 + y._1, x._2 + y._2, x._3 + y._3, x._4 + y._4) }
 
     val res: RDD[(Long, (Iterable[(Int, Int, Int, Int)], Iterable[(Int, Int, Int, Int)], Iterable[(Int, Int, Int, Int)], Iterable[(Int, Int, Int, Int)]))] = counts.cogroup(min, mean, max)
