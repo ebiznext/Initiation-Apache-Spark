@@ -82,6 +82,11 @@ Un nouvel RDD est créé mais en maintenant les clefs colocalisés sur les même
 
 Le ``join`` est réalisé avec une performance optimale.
 
+
+```scala
+
+```
+
 ### Repartitionnement
 Suite à des opérations de transformation réduisant de manière significative la taille du RDD, il peut être utile de réduire le nombre de paritions. C'est ce que permet la transformation ``coalesce``
 
