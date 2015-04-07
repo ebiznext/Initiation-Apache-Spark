@@ -121,10 +121,6 @@ Certaines actions peuvent ne rien renvoyer du tout, comme cela est le cas pour l
     mean=$mean
     max=$max
       """)
-
-
-    val l = List(1, 2, 3 4, 5, 6, 7)
-
   }
 }
 
