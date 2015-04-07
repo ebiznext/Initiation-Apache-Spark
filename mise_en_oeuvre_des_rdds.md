@@ -104,17 +104,11 @@ Certaines actions peuvent ne rien renvoyer du tout, comme cela est le cas pour l
     val url = Paths.get(getClass.getResource("/ratings.txt").toURI).toAbsolutePath.toString
     val sc = new SparkContext(conf)
 
-    // Charger le fichier de ratings 
+    // Charger le fichier de ratings dans un RDD
     val baselines: RDD[Seq[String]] = sc.textFile(url).map(_.split('\t'))
     val lines: RDD[Rating] = baselines.map(row => Rating(row(0).toLong, row(1).toLong, row(2).toInt, new Timestamp(row(3).toLong * 1000)))
 
-    val mean = lines.filter(_.user == 200).map(_.rating).mean()
-    val max = lines.filter(_.user == 200).map(_.rating).max()
-    val min = lines.filter(_.user == 200).map(_.rating).min()
-    val count = lines.filter(_.user == 200).count()
-
-    val x = 1 until 1001
-    sc.parallelize(x)
+    // calculer la moyenne, le min, le max et le nombre d'éléments pour l'utilisateur avec l'id 200
 
     println( s"""
     count=$count
