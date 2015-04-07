@@ -126,5 +126,59 @@ Certaines actions peuvent ne rien renvoyer du tout, comme cela est le cas pour l
 Spark offre des fonctionnalités spécifiques aux RDD clef-valeur - ``RDD[(K,V)]``. Il s'agit notamment des fonctions ``groupByKey, reduceByKey, mapValues, countByKey``, 
 https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.PairRDDFunctions
 
+###Exercice
+```
+ // Combien de fois chaque utilisateur a voté
+  def main(args: Array[String]): Unit = {
+    val conf = new SparkConf().setAppName("Workshop").setMaster("local[*]")
+    val url = Paths.get(getClass.getResource("/ratings.txt").toURI).toAbsolutePath.toString
+    val sc = new SparkContext(conf)
+
+    val lines: RDD[Rating] = sc.textFile(url).map(_.split('\t')).map(row => Rating(row(0).toLong, row(1).toLong, row(2).toInt, new Timestamp(row(3).toLong * 1000)))
+
+    val cachedRDD: RDD[(Long, Int)] = lines.map(rating => (rating.user, rating.rating)).persist()
+    val count = cachedRDD.count()
+    println(s"Count=$count")
+    val userCount = cachedRDD.groupByKey().count()
+    println(s"UserCount=$userCount")
+
+    val sum: RDD[(Long, Int)] = cachedRDD.reduceByKey(_ + _)
+    val counts: RDD[(Long, (Int, Int, Int, Int))] = cachedRDD.map(row => (row._1, 1)).reduceByKey(_ + _).mapValues((0, 0, 0, _))
+    val min: RDD[(Long, (Int, Int, Int, Int))] = cachedRDD.reduceByKey((x, y) => if (x <= y) x else y).mapValues((_, 0, 0, 0))
+    val mean: RDD[(Long, (Int, Int, Int, Int))] = counts.join(sum).map { case (x, y) => (x, y._2 / y._1._4) }.mapValues((0, _, 0, 0))
+    val max: RDD[(Long, (Int, Int, Int, Int))] = cachedRDD.reduceByKey((x, y) => if (x >= y) x else y).mapValues((0, 0, _, 0))
+
+    val allRDDs: RDD[(Long, (Int, Int, Int, Int))] = sc.union(min, mean, max, counts).reduceByKey { (x, y) => (x._1 + y._1, x._2 + y._2, x._3 + y._3, x._4 + y._4) }
+
+    val res: RDD[(Long, (Iterable[(Int, Int, Int, Int)], Iterable[(Int, Int, Int, Int)], Iterable[(Int, Int, Int, Int)], Iterable[(Int, Int, Int, Int)]))] = counts.cogroup(min, mean, max)
+
+
+    // ----> Ne fonctionnera pas
+    //    cachedRDD.map { userRatings =>
+    //      val user = userRatings._1
+    //      val ratings = sc.makeRDD(userRatings._2)
+    //      ratings.map(_.rating).mean()
+    //    }
+
+    allRDDs.foreach { case (x, y) =>
+      println( s"""
+     user=$x
+     count=${y._4}
+     min=${y._1}
+     mean=${y._2}
+     max=${y._3}
+       """)
+    }
+    val sqlContext: SQLContext = new org.apache.spark.sql.SQLContext(sc)
+    import sqlContext.implicits._
+
+    lines.toDF().registerTempTable("ratings")
+    val maxRatings: DataFrame = sqlContext.sql("SELECT user, rating from ratings where rating = 5")
+    //maxRatings.map(row => row(0) + "=" + row(1)).collect().foreach(println)
+
+  }
+}
+
+```
 
 
