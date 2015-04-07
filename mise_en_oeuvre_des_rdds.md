@@ -136,6 +136,7 @@ https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.Pa
     // Mettre le RDD en cache
     // Calculer le nombre de paires
     println(s"Count=$count")
+    // Calculer le nombre d'utilisateur distincts
     val userCount = cachedRDD.groupByKey().count()
     println(s"UserCount=$userCount")
 
