@@ -123,7 +123,7 @@ Certaines actions peuvent ne rien renvoyer du tout, comme cela est le cas pour l
 Spark offre des fonctionnalités spécifiques aux RDD clef-valeur - ``RDD[(K,V)]``. Il s'agit notamment des fonctions ``groupByKey, reduceByKey, mapValues, countByKey``, 
 https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.PairRDDFunctions
 
-###Exercice 2
+###Exercice 3
 ```
  // Combien de fois chaque utilisateur a voté
   def main(args: Array[String]): Unit = {
