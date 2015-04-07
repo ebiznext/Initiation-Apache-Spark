@@ -145,12 +145,7 @@ object Workshop5 {
     val count = cachedRDD.count()
     println(s"usercount=$count")
 
-    val allRDDs: RDD[(Long, (Int, Int, Int, Int))] = cachedRDD.mapPartitions {
-      userRatings => userRatings.map {
-        case (user, ratings) =>
-          (user, (ratings.min, ratings.sum / ratings.size, ratings.max, ratings.size))
-      }
-    }
+    val allRDDs: RDD[(Long, (Int, Int, Int, Int))] = ...
 
     // compute the mean
     val accumSum: Accumulator[Int] = sc.accumulator(0)
