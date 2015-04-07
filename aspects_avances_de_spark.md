@@ -50,6 +50,7 @@ object Workshop2 {
     // Charger le fichier de ratings dans un RDD
     // Cacher le RDD de l'utilisateur avec l'id 200
     // calculer la moyenne, le min, le max et le nombre d'éléments pour l'utilisateur avec l'id 200
+    // Libérer du cache
 
 
     println( s"""
