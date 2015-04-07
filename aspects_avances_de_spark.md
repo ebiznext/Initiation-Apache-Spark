@@ -38,7 +38,7 @@ conf.set("spark.serializer", ""org.apache.spark.serializer.KryoSerializer)
 conf.set("spark.kryo.registrationRequired", "true")
 conf.registerKryoClasses(Array(classOf[Class1], classOf[Class2], classOf[Class3]))
 ```
-###Exercice
+###Exercice 2
 ```scala
 object Workshop2 {
 
