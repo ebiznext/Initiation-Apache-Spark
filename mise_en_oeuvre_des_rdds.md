@@ -109,6 +109,7 @@ Certaines actions peuvent ne rien renvoyer du tout, comme cela est le cas pour l
     val lines: RDD[Rating] = baselines.map(row => Rating(row(0).toLong, row(1).toLong, row(2).toInt, new Timestamp(row(3).toLong * 1000)))
 
     // calculer la moyenne, le min, le max et le nombre d'éléments pour l'utilisateur avec l'id 200
+    // ...
 
     println( s"""
     count=$count
