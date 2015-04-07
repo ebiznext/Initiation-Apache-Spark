@@ -6,7 +6,6 @@ Tous les programmes Spark ne sont pas égaux. Spark offre plusieurs mécanismes 
 
 
 
-### mapPartitions
 
 
 ### La sérialisation
