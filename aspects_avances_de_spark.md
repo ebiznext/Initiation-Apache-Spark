@@ -184,7 +184,6 @@ object Workshop6 {
 
 
     val lines: RDD[Rating] = // ...
-    println(lines.partitioner)
     lines.filter(_.rating == 5).map(_.movie).distinct().sortBy(x => x).foreach { movieid =>
       println(labels.value(movieid))
     }
