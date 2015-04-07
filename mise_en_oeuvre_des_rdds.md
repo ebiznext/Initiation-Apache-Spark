@@ -1,5 +1,4 @@
 # Partie 2 : Mise en oeuvre des RDDs
-#TODO: AjouterHadoop / BaseRDD
 
 
 Les RDDs sont une collection d'objets immuables répartis sur plusieurs noeuds d'un cluster. Un RDD est créé à partir d'un source de données ou d'une collection d'objets Scala / Python ou Java.
