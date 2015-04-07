@@ -84,7 +84,53 @@ Le ``join`` est réalisé avec une performance optimale.
 
 
 ```scala
+object Workshop6 {
 
+  // Combien de fois chaque utilisateur a voté
+  def main(args: Array[String]): Unit = {
+    val conf = new SparkConf().setAppName("Workshop").setMaster("local[*]")
+    val url = Paths.get(getClass.getResource("/ratings.txt").toURI).toAbsolutePath.toString
+    val urlProducts = Paths.get(getClass.getResource("/products.txt").toURI).toAbsolutePath.toString
+    val sc = new SparkContext(conf)
+
+
+    val lines: RDD[Rating] = sc.textFile(url).map(_.split('\t')).map(row => Rating(row(0).toLong, row(1).toLong, row(2).toInt, new Timestamp(row(3).toLong * 1000)))
+
+    val cachedRDD: RDD[(Long, List[Int])] = lines.map(rating => (rating.user, List(rating.rating))).reduceByKey(_ ++ _) persist()
+    val count = cachedRDD.count()
+    println(s"usercount=$count")
+
+    val allRDDs: RDD[(Long, (Int, Int, Int, Int))] = cachedRDD.mapPartitions {
+      userRatings => userRatings.map {
+        case (user, ratings) =>
+          (user, (ratings.min, ratings.sum / ratings.size, ratings.max, ratings.size))
+      }
+    }
+
+    // compute the mean
+    val accumSum: Accumulator[Int] = sc.accumulator(0)
+    val accumCount: Accumulator[Int] = sc.accumulator(0)
+    cachedRDD.foreach { it =>
+      accumSum += it._2.sum
+      accumCount += it._2.size
+    }
+
+    lines.map(_.movie).distinct().collect().foreach { movie =>
+      println(movie+"\tProduct "+movie)
+    }
+    val globalMean = accumSum.value / accumCount.value
+    println(s"global mean = ${globalMean}")
+    allRDDs.filter(_._1 == 315).foreach { case (x, y) =>
+      println( s"""
+     user=$x
+     count=${y._4}
+     min=${y._1}
+     mean=${y._2}
+     max=${y._3}
+       """)
+    }
+  }
+}
 ```
 
 ### Repartitionnement
