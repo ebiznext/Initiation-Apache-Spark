@@ -38,7 +38,6 @@ Blog: http://blog.ebiznext.com
 
 
 
-
 ![](oliviergirardot.jpg)
 
 Olivier Girardot  Twitter
