@@ -97,6 +97,8 @@ Certaines actions peuvent ne rien renvoyer du tout, comme cela est le cas pour l
 ###Exercice 1 : Mise en oeuvre des RDDs
 
 ```scala
+object Workshop1 {
+
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Workshop").setMaster("local[*]")
     // Fichier de rating au format userid\tmovie\trating\ttimestamp
@@ -115,7 +117,6 @@ Certaines actions peuvent ne rien renvoyer du tout, comme cela est le cas pour l
       """)
   }
 }
-
 ```
 
 ## Le cache
@@ -222,13 +223,6 @@ https://spark.apache.org/docs/1.3.0/api/scala/index.html#org.apache.spark.rdd.Pa
      max=${y._3}
        """)
     }
-    val sqlContext: SQLContext = new org.apache.spark.sql.SQLContext(sc)
-    import sqlContext.implicits._
-
-    lines.toDF().registerTempTable("ratings")
-    val maxRatings: DataFrame = sqlContext.sql("SELECT user, rating from ratings where rating = 5")
-    //maxRatings.map(row => row(0) + "=" + row(1)).collect().foreach(println)
-
   }
 }
 
