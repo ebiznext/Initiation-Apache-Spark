@@ -26,7 +26,6 @@ Distribution Spark et contenu du Hands-on Lab
 
 
 
-
 ![](hayssams.jpg)
 
 Hayssam Saleh  Twitter
