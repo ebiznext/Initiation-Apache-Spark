@@ -7,5 +7,5 @@
 * [Partie 3 : Aspects avancés de Spark](aspects_avances_de_spark.md)
 * [Partie 4 : Spark Streaming](spark_streaming.md)
 * Partie 5 : SparkSQL
-* [Chargement et stockage des données](chargement_et_stockage_des_donnees.md)
+* [Partie 6 : Chargement et stockage des données](chargement_et_stockage_des_donnees.md)
 
