@@ -14,7 +14,7 @@ qui vont conserver les valeurs antérieures et permettent de travailler sur une 
 Dans l'exemple ci-dessous, on affiche toutes les 20s le nombre de mots enovyés dans la minute.
 
 ```scala
-object Workshop9 {
+object Workshop {
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Workshop").setMaster("local[*]")
     val ssc = new StreamingContext(conf, Seconds(1))
