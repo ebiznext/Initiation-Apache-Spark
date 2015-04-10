@@ -19,29 +19,3 @@ Les prérequis à installer :
 JDK 8
 Distribution Spark et contenu du Hands-on Lab
 
-
-# Les animateurs
-
-
-
-
-
-![](hayssams.jpg)
-
-Hayssam Saleh  Twitter
-FROM EBIZNEXT
-
-Apache Spark Certified Developer, Hayssam Saleh is Senior Architect with a focus on fault tolerant distributed systems and Web applications. He is currently the technical lead at EBIZNEXT where he supervises Scala / NoSQL projects since early 2012. He holds a PhD in distributed computing from Université Pierre et Marie Curie (Paris VI).
-
-Blog: http://blog.ebiznext.com
-
-
-
-![](oliviergirardot.jpg)
-
-Olivier Girardot  Twitter
-FROM LATERAL THOUGHTS
-
-Consultant et Associé fondateur de Lateral-Thoughts.com. Je suis développeur Java, Scala, Python et je m'intéresse de près aux problématiques des Moteurs de Recherche, du BigData, du Machine Learning et du NLP.
-
-Blog: http://ogirardot.wordpress.com
