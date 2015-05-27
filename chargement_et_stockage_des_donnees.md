@@ -83,4 +83,17 @@ collection.saveToCassandra("test", "kv", SomeColumns("key", "value"))
 
 ```
 
+```scala
+import org.elasticsearch.spark.sql._
+
+val sql = new SQLContext(sc)
+val rdd1 = ... // from ES
+val rdd2 = ... // from ES
+rdd1.registerTempTable("table1")
+rdd2.registerTempTable("table2")
+sqlContext.sql("SELECT username, COUNT(*) AS cnt FROM wikiData WHERE username <> '' GROUP BY username ORDER BY cnt DESC LIMIT 10").collect().foreach(println)
+
+
+```
+
 
